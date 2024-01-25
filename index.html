@@ -1,19 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>
-Trader Selector</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" content="villlager, trader">
-<meta name="description" content="description">
-<style>
-body {background-color:#ffffff;background-repeat:no-repeat;background-position:top left;background-attachment:fixed;}
-h1{font-family:Arial, sans-serif;color:#000000;background-color:#ffffff;}
-p {font-family:Georgia, serif;font-size:14px;font-style:normal;font-weight:normal;color:#000000;background-color:#ffffff;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        select {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-<h1>Trader Selector</h1>
-<p>DEsciption of application</p>
+
+    <table id="dynamicTable">
+        <tr>
+            <td>
+                <!-- Dropdowns will be dynamically populated -->
+            </td>
+        </tr>
+    </table>
+
+    <button onclick="addRow()">Add Row</button>
+    <button onclick="addColumn()">Add Column</button>
+
+    <script>
+        var valuesArray = ["Select trade","Mending"];
+
+        function addRow() {
+            var table = document.getElementById("dynamicTable");
+            var newRow = table.insertRow(table.rows.length);
+
+            var cell = newRow.insertCell(0);
+
+            // Add four dropdowns to each cell
+            for (var i = 0; i < 4; i++) {
+                var select = document.createElement("select");
+
+                // Populate dropdown with values from the array
+                for (var j = 0; j < valuesArray.length; j++) {
+                    var option = document.createElement("option");
+                    option.value = valuesArray[j];
+                    option.text = valuesArray[j];
+                    select.add(option);
+                }
+
+                cell.appendChild(select);
+            }
+        }
+
+        function addColumn() {
+            var table = document.getElementById("dynamicTable");
+
+            for (var i = 0; i < table.rows.length; i++) {
+                var cell = table.rows[i].insertCell(table.rows[i].cells.length);
+
+                // Add four dropdowns to each cell
+                for (var j = 0; j < 4; j++) {
+                    var select = document.createElement("select");
+
+                    // Populate dropdown with values from the array
+                    for (var k = 0; k < valuesArray.length; k++) {
+                        var option = document.createElement("option");
+                        option.value = valuesArray[k];
+                        option.text = valuesArray[k];
+                        select.add(option);
+                    }
+
+                    cell.appendChild(select);
+                }
+            }
+        }
+    </script>
+
 </body>
 </html>
